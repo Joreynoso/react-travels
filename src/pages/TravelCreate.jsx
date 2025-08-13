@@ -6,6 +6,8 @@ import LoadingCard from "../components/LoadingCard"
 import ErrorCard from "../components/ErrorCard"
 import GoBackButton from "../components/GoBackButton"
 import { motion } from 'framer-motion'
+import { toast } from 'react-toastify'
+import toastifyStyle from '../helpers/toastifyStyle'
 
 export default function TravelsCreate() {
 
@@ -25,6 +27,7 @@ export default function TravelsCreate() {
         try {
             console.log('-->[FORM DATA] data received', data)
             await createDestination(data)
+            toast.success('Destination created', toastifyStyle)
             navigate("/travels")
         } catch (error) {
             console.error(error)

@@ -7,6 +7,8 @@ import ErrorCard from '../components/ErrorCard'
 import CircleDecoration from "../components/CircleDecoration"
 import GoBackButton from "../components/GoBackButton"
 import { motion } from 'framer-motion'
+import { toast } from 'react-toastify'
+import toastifyStyle from '../helpers/toastifyStyle'
 
 export default function TravelsDetail() {
 
@@ -27,8 +29,10 @@ export default function TravelsDetail() {
     async function handleDelete() {
         try {
             await deleteDestination(destination.id)
+            toast.success('Destination deleted', toastifyStyle)
             navigate("/travels")
         } catch (error) {
+            console.log(error)
             setError(error)
         }
 
@@ -125,7 +129,7 @@ export default function TravelsDetail() {
 
                 {/* modal */}
                 {isOpen ? (
-                    <mo className='fixed inset-0 bg-black/60 flex justify-center items-center p-3 z-50'>
+                    <motion.div className='fixed inset-0 bg-black/60 flex justify-center items-center p-3 z-50'>
                         <motion.div
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -159,7 +163,7 @@ export default function TravelsDetail() {
                                 </button>
                             </div>
                         </motion.div>
-                    </mo>
+                    </motion.div>
                 ) : null}
 
             </motion.div>

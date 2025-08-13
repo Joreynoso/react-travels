@@ -5,8 +5,13 @@ import LoadingCard from "../components/LoadingCard"
 import ErrorCard from "../components/ErrorCard"
 import { useForm } from "react-hook-form"
 import { motion } from 'framer-motion'
+import { toast } from 'react-toastify'
+import toastifyStyle from '../helpers/toastifyStyle'
 
 export default function TravelUpdate() {
+    console.log(toastifyStyle
+
+    )
     const { error, loading, travels, updateDestination } = useTravel()
     const { id } = useParams()
     const navigate = useNavigate()
@@ -27,8 +32,10 @@ export default function TravelUpdate() {
 
     async function handleUpdate(data) {
         try {
-            navigate("/travels", { replace: true })
             await updateDestination(id, data)
+            toast.success('Destination updated', toastifyStyle)
+            navigate("/travels", { replace: true })
+
         } catch (error) {
             console.error(error)
         }

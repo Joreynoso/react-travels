@@ -25,6 +25,7 @@ export const TravelProvider = ({ children }) => {
             const data = response.data.destinations
             setTravels(data)
         } catch (error) {
+            console.error(error)
             setError(error.message || 'Unknown error')
         } finally {
             setLoading(false)
